@@ -1,17 +1,20 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext } from "react";
 import { BookContext } from "../contexts/BookContext";
-import BookListItem from "./BookListItem";
+import BookDetails from "./BookDetails";
+
 const BookList = () => {
-  const bookContext = useContext(BookContext);
-  const { books } = bookContext;
-  return (
-    <Fragment>
+  const { books } = useContext(BookContext);
+
+  return books.length ? (
+    <div className="book-list">
       <ul>
         {books.map(book => (
-          <BookListItem key={book.id} book={book} />
+          <BookDetails key={book.id} book={book} />
         ))}
       </ul>
-    </Fragment>
+    </div>
+  ) : (
+    <div className="empty">No books to read. Hello free time :)</div>
   );
 };
 
